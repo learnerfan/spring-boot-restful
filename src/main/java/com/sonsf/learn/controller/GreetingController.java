@@ -2,8 +2,10 @@ package com.sonsf.learn.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sonsf.learn.service.CacheService;
+import com.sonsf.learn.service.EcacheService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/v1.0/greeting")
 @RestController
 public class GreetingController {
+    private final EcacheService ecacheService = new EcacheService();
+
     @RequestMapping(value = "/hello",method = RequestMethod.GET)
     @ApiOperation(value = "问候接口",notes = "这个接口通过输入一个名字，返回hell+name信息，内容放在message对象中")
     public JSONObject greet(@ApiParam(value = "名字")@RequestParam()String name){
@@ -36,5 +40,11 @@ public class GreetingController {
             cacheService.putExpire1Cache(name,"hello"+name);
             return response;
         }
+    }
+    @RequestMapping(value = "/ecacheTest",method = RequestMethod.GET)
+    @ApiOperation(value = "spring boot 注解缓存接口",notes = "")
+    public String ecacheTest(@RequestParam()String name){
+
+        return ecacheService.getMessage(name);
     }
 }
