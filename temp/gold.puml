@@ -1,0 +1,47 @@
+@startuml
+start
+note:参数说明:\n rewoardLine = 12 reduceNum = 15 reduceLevelScoreSub = 8 reduceLevelScoreInfo = 12 \n rankRewardTable,rankReduceTable
+:rank;
+if (score > 12) then (yes)
+    if (score > 15) then (yes)
+    :根据排名确定奖励;
+    note left:排名并列怎么处理 order by time,\n扣分导致并列情况不合理
+        fork
+        :NO.1 = 50;
+        fork again
+        :NO.2~NO.3 = 25;
+        fork again
+        :NO.5~NO.6 = 10;
+        note right:NO.4 = ?
+        end fork
+    else (no)
+     :otherNo.*奖励5个金币;
+    endif
+else (no)
+:可能扣除金币，数目未知;
+:必抓15人;
+    if (score < 8 && num > 15) then (yes)
+       fork
+       :NO.1 = -50;
+       fork again
+       :NO.2~NO.10 = -25;
+       fork again
+       :other = - 10;
+       end fork
+    else (no)
+     : score < 12;
+        repeat
+        fork
+        :NO.1 = -50;
+        fork again
+        :NO.2~NO.10 = -25;
+        fork again
+        :other = - 10;
+        end fork
+        repeat while (num = 15)
+    endif
+endif
+
+stop
+note left:规则可以变，但是要通过改变参数数值的方式来改变，尽量不要增加配置参数\n 关于排名并列的处理方式，之前的有漏洞，本次需要确定最终方案
+@enduml

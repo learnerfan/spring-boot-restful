@@ -1,4 +1,21 @@
 #spring.jackson.date-format=yyyy-MM-dd'T'HH:mm:ss.SSSZ
 ###port
 server:
-  port: 7101
+  port: 7102
+
+#指定一个绝对的路径;
+#spring.datasource.url = jdbc:h2:file:D:\\test\\db\\testdb
+#使用~标明位置;
+
+spring:
+  datasource:
+    primary:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/songsf_dev?characterEncoding=utf-8
+      username: root
+      password: 123456
+    secondary:
+      url: jdbc:h2:file:D:\\test\\db\\testdb
+      username: sa
+      password: sa
+

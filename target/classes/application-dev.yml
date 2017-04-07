@@ -1,4 +1,0 @@
-#spring.jackson.date-format=yyyy-MM-dd'T'HH:mm:ss.SSSZ
-###port
-server:
-  port: 7101
