@@ -1,5 +1,6 @@
 package com.songsf.learn.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.songsf.learn.domain.p.User;
 import com.songsf.learn.domain.p.UserRepository;
@@ -10,6 +11,8 @@ import com.songsf.learn.service.CacheService;
 import com.songsf.learn.service.EcacheService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ import java.util.Date;
 @RestController
 public class GreetingController {
     private final EcacheService ecacheService = new EcacheService();
+    Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
     @Autowired
     private HystrixTestService hystrixTestService;
@@ -38,7 +42,9 @@ public class GreetingController {
     @ApiOperation(value = "问候接口",notes = "这个接口通过输入一个名字，返回hell+name信息，内容放在message对象中")
     public JSONObject greet(@ApiParam(value = "名字")@RequestParam()String name){
         JSONObject response = new JSONObject();
+
         response.put("message","hello"+"   "+name);
+        logger.debug(JSON.toJSONString(response));
         return response;
     }
     @RequestMapping(value = "/cacheTest",method = RequestMethod.GET)

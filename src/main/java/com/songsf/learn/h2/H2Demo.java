@@ -60,11 +60,11 @@ public class H2Demo {
         }
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         H2Demo h2 = new H2Demo();
         h2.startServer();
         h2.useH2();
        // h2.stopServer();
         //System.out.println("==END==");
-    }
+    }*/
 }

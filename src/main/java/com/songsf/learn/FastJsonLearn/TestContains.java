@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSONObject;
  * Created by songsf on 2017/3/7.
  */
 public class TestContains {
-    public static void main(String[] args){
+   /* public static void main(String[] args){
         for (int i = 0 ; i < 10 ; i++){
             for (int j = 10 ; j < 20 ; j ++){
                 if (j % 2 == 0){
@@ -17,7 +17,7 @@ public class TestContains {
                 }
             }
         }
-    }
+    }*/
 
     public static void test1(){
         String str = "{\n" +
